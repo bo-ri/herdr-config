@@ -100,3 +100,57 @@ command = "nvim ."
 description = "open nvim in popup Herdr session"
 width = "95%"
 height = "95%"
+
+# fzf file picker: append selected paths to the active shell command line.
+[[keys.command]]
+key = "ctrl+t"
+type = "popup"
+command = '''
+selection=$(
+  rg --files --hidden --follow --glob '!.git/*' 2>/dev/null |
+    fzf --multi \
+      --preview 'bat --color=always --style=header,grid -- {}' \
+      --bind 'ctrl-t:abort'
+) || exit 0
+[ -n "$selection" ] || exit 0
+
+quoted=""
+while IFS= read -r path; do
+  escaped=$(printf '%q' "$path")
+  if [ -n "$quoted" ]; then
+    quoted="$quoted $escaped"
+  else
+    quoted=$escaped
+  fi
+done <<EOF
+$selection
+EOF
+
+"$HERDR_BIN_PATH" pane send-text "$HERDR_ACTIVE_PANE_ID" "$quoted"
+'''
+description = "find files with fzf"
+width = "95%"
+height = "95%"
+
+# fzf history picker: replace the active shell command line with the selection.
+[[keys.command]]
+key = "ctrl+r"
+type = "popup"
+command = '''
+selection=$(
+  zsh -dfc 'fc -R "$HOME/.zsh_history"; fc -rl 1' 2>/dev/null |
+    sed -E 's/^ *[0-9]+\** +//' |
+    awk '!seen[$0]++' |
+    fzf --no-sort \
+      --preview 'echo {}' \
+      --preview-window 'down:3:hidden:wrap' \
+      --bind '?:toggle-preview,ctrl-r:abort'
+) || exit 0
+[ -n "$selection" ] || exit 0
+
+"$HERDR_BIN_PATH" pane send-keys "$HERDR_ACTIVE_PANE_ID" ctrl+u
+"$HERDR_BIN_PATH" pane send-text "$HERDR_ACTIVE_PANE_ID" "$selection"
+'''
+description = "search shell history with fzf"
+width = "95%"
+height = "95%"
