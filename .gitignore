@@ -1,0 +1,15 @@
+# Runtime sockets
+*.sock
+*.sock.agent
+
+# Logs
+*.log
+
+# Session state and recovery snapshots
+/session.json
+/session-snapshots/
+/sessions/
+
+# Herdr-managed local state
+/release-notes.json
+/.plugins.lock

@@ -1,0 +1,30 @@
+onboarding = false
+
+[ui]
+status_indicators = "symbols"
+
+[theme]
+name = "one-dark"
+auto_switch = false
+
+[experimental]
+allow_nested = true
+
+[keys]
+prefix = "ctrl+f"
+split_vertical = "prefix+|"
+previous_workspace = "cmd+shift+["
+next_workspace = "cmd+shift+]"
+
+# Inside a popup, every popup-opening shortcut detaches this client instead.
+# The popup command then exits, so the outer Herdr instance closes the popup.
+detach = [
+  "prefix+ctrl+p",
+  "prefix+ctrl+t",
+  "prefix+ctrl+s",
+  "prefix+ctrl+i",
+  "prefix+ctrl+m",
+  "prefix+ctrl+v",
+  "prefix+ctrl+b",
+  "prefix+ctrl+e",
+]

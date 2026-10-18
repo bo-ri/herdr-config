@@ -1,0 +1,102 @@
+onboarding = false
+
+[ui]
+status_indicators = "symbols"
+
+[theme]
+name = "one-dark"
+auto_switch = false
+
+[experimental]
+# Allow the persistent named `popup` Herdr session inside popup terminals.
+allow_nested = true
+
+[keys]
+# tmux: set -g prefix C-f
+prefix = "ctrl+f"
+
+# tmux: bind r source-file ~/.tmux.conf
+reload_config = "prefix+r"
+resize_mode = ""
+
+# tmux-style pane split and movement
+split_vertical = "prefix+|"
+split_horizontal = "prefix+minus"
+focus_pane_left = "prefix+h"
+focus_pane_down = "prefix+j"
+focus_pane_up = "prefix+k"
+focus_pane_right = "prefix+l"
+previous_workspace = "cmd+shift+["
+next_workspace = "cmd+shift+]"
+
+# tmux popup replacement: scratch shell
+[[keys.command]]
+key = "prefix+ctrl+p"
+type = "popup"
+command = "$HOME/.config/herdr/popup-session.sh attach"
+description = "attach persistent popup Herdr session"
+width = "95%"
+height = "95%"
+
+# tmux popup replacement: tig
+[[keys.command]]
+key = "prefix+ctrl+t"
+type = "popup"
+command = "$HOME/.config/herdr/popup-session.sh tig"
+description = "open tig in popup Herdr session"
+width = "95%"
+height = "95%"
+
+# tmux popup replacement: git_switch_with_fzf
+[[keys.command]]
+key = "prefix+ctrl+s"
+type = "popup"
+command = "$HOME/.config/herdr/popup-session.sh git-switch"
+description = "switch git branch in popup Herdr session"
+width = "95%"
+height = "95%"
+
+# tmux popup replacement: git branch --edit-description
+[[keys.command]]
+key = "prefix+ctrl+i"
+type = "popup"
+command = "$HOME/.config/herdr/popup-session.sh git-description"
+description = "edit git branch description in popup Herdr session"
+width = "95%"
+height = "95%"
+
+# tmux popup replacement: lazydocker
+[[keys.command]]
+key = "prefix+ctrl+m"
+type = "popup"
+command = "$HOME/.config/herdr/popup-session.sh lazydocker"
+description = "open lazydocker in popup Herdr session"
+width = "95%"
+height = "95%"
+
+# tmux popup replacement: btop
+[[keys.command]]
+key = "prefix+ctrl+b"
+type = "popup"
+command = "$HOME/.config/herdr/popup-session.sh btop"
+description = "open btop in popup Herdr session"
+width = "95%"
+height = "95%"
+
+# tmux popup replacement: ekphos (Obsidian)
+[[keys.command]]
+key = "prefix+ctrl+e"
+type = "popup"
+command = "$HOME/.config/herdr/popup-session.sh ekphos"
+description = "open Obsidian vault in popup Herdr session"
+width = "95%"
+height = "95%"
+
+
+[[keys.command]]
+key = "prefix+ctrl+v"
+type = "popup"
+command = "nvim ."
+description = "open nvim in popup Herdr session"
+width = "95%"
+height = "95%"
